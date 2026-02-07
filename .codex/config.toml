@@ -1,0 +1,3 @@
+# Codex CLI project configuration
+# Increase instruction size limit to accommodate AGENTS.md + skills
+project_doc_max_bytes = 65536

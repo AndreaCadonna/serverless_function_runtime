@@ -1,1 +1,15 @@
-.codex/
+# Codex CLI local state (but keep config.toml)
+.codex/*
+!.codex/config.toml
+
+# Node
+node_modules/
+dist/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
