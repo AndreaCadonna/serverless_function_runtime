@@ -2,6 +2,7 @@ import http from 'node:http';
 
 import { dispatchRequest } from './dispatcher.js';
 import { discoverRoutes } from './route-discovery.js';
+import { createRuntimeErrorResponse } from './error-handler.js';
 import { createWebRequest } from './request-adapter.js';
 import { writeWebResponse } from './response-adapter.js';
 
@@ -36,14 +37,21 @@ export async function startServer(port = 3000) {
         await writeWebResponse(webResponse, outgoingResponse);
       })
       .catch((error) => {
-        outgoingResponse.statusCode = 500;
-        outgoingResponse.setHeader('content-type', 'application/json');
-        outgoingResponse.end(
-          JSON.stringify({
-            errorCode: 'HANDLER_EXCEPTION',
-            message: error instanceof Error ? error.message : 'Unhandled runtime error'
-          })
-        );
+        const message = error instanceof Error ? error.message : 'Unhandled runtime error';
+        const runtimeErrorResponse = createRuntimeErrorResponse('HANDLER_EXCEPTION', message);
+
+        writeWebResponse(runtimeErrorResponse, outgoingResponse).catch(() => {
+          if (!outgoingResponse.headersSent) {
+            outgoingResponse.statusCode = 500;
+            outgoingResponse.setHeader('content-type', 'application/json');
+          }
+          outgoingResponse.end(
+            JSON.stringify({
+              errorCode: 'HANDLER_EXCEPTION',
+              message
+            })
+          );
+        });
       });
   });
 
