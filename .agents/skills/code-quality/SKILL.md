@@ -1,7 +1,6 @@
 ---
 name: code-quality
-description: Node.js code quality standards for the serverless function runtime.
-  Use when writing, reviewing, or refactoring JavaScript/TypeScript code.
+description: Node.js code quality standards for the serverless function runtime. Use when writing, reviewing, or refactoring JavaScript/TypeScript code.
 ---
 
 # Code Quality — Skill

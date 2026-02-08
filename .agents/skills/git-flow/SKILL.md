@@ -1,7 +1,6 @@
 ---
 name: git-flow
-description: Git branching strategy, commit conventions, and merge workflow.
-  Use when creating branches, writing commit messages, merging, or planning git operations.
+description: Git branching strategy, commit conventions, and merge workflow. Use when creating branches, writing commit messages, merging, or planning git operations.
 ---
 
 # Git Flow — Skill
@@ -19,9 +18,9 @@ Enforce consistent git practices across all phases — planning, implementation,
 
 ## Branching Conventions
 
-1. **Never commit directly to `main` or `develop`.** All work happens on feature branches.
+1. **Avoid direct commits to `main` when possible.** Prefer feature/fix branches for isolated work.
 2. **Branch naming**: `feature/<short-kebab-description>` for features, `fix/<short-kebab-description>` for fixes.
-3. **Branch from `develop`** (or `main` if no `develop` branch exists).
+3. **Branch from `main`**.
 4. **One logical task per branch.** Do not mix unrelated changes.
 
 ## Commit Conventions

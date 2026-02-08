@@ -1,7 +1,6 @@
 ---
 name: design-document
-description: Technical design document format and conventions for implementation planning.
-  Use when creating or reviewing a technical design that translates a spec into an implementation plan.
+description: Technical design document format and conventions for implementation planning. Use when creating or reviewing a technical design that translates a spec into an implementation plan.
 ---
 
 # Design Document — Skill

@@ -1,7 +1,6 @@
 ---
 name: validation-report
-description: Validation report format and testing conventions for verifying implementation against spec.
-  Use when planning, executing, or reporting validation of the runtime against its specification.
+description: Validation report format and testing conventions for verifying implementation against spec. Use when planning, executing, or reporting validation of the runtime against its specification.
 ---
 
 # Validation Report — Skill
