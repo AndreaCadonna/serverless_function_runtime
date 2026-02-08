@@ -1,6 +1,9 @@
 import http from 'node:http';
 
+import { dispatchRequest } from './dispatcher.js';
 import { discoverRoutes } from './route-discovery.js';
+import { createWebRequest } from './request-adapter.js';
+import { writeWebResponse } from './response-adapter.js';
 
 function listen(server, port) {
   return new Promise((resolve, reject) => {
@@ -22,15 +25,26 @@ function listen(server, port) {
 export async function startServer(port = 3000) {
   const routeMap = await discoverRoutes('api');
 
-  const server = http.createServer((_request, response) => {
-    response.statusCode = 501;
-    response.setHeader('content-type', 'application/json');
-    response.end(
-      JSON.stringify({
-        message: 'Runtime initialized',
-        routesDiscovered: routeMap.size
+  const server = http.createServer((incomingRequest, outgoingResponse) => {
+    const host = incomingRequest.headers.host ?? '127.0.0.1';
+    const origin = `http://${host}`;
+
+    Promise.resolve()
+      .then(async () => {
+        const webRequest = await createWebRequest(incomingRequest, origin);
+        const webResponse = await dispatchRequest(webRequest, routeMap);
+        await writeWebResponse(webResponse, outgoingResponse);
       })
-    );
+      .catch((error) => {
+        outgoingResponse.statusCode = 500;
+        outgoingResponse.setHeader('content-type', 'application/json');
+        outgoingResponse.end(
+          JSON.stringify({
+            errorCode: 'HANDLER_EXCEPTION',
+            message: error instanceof Error ? error.message : 'Unhandled runtime error'
+          })
+        );
+      });
   });
 
   server.routeMap = routeMap;
