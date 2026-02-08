@@ -1,3 +1,8 @@
+---
+name: fix-report
+description: Fix report format and conventions for diagnosing validation failures and producing a fix plan. Use when creating or reviewing a fix report within the agentic spec-driven development workflow.
+---
+
 # Fix Report — Skill
 
 ## Purpose

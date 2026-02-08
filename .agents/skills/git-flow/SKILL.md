@@ -1,7 +1,6 @@
 ---
 name: git-flow
-description: Git branching strategy, commit conventions, and merge workflow.
-  Use when creating branches, writing commit messages, merging, or planning git operations.
+description: Git branching strategy, commit conventions, and merge workflow. Use when creating branches, writing commit messages, merging, or planning git operations.
 ---
 
 # Git Flow — Skill

@@ -82,6 +82,8 @@ test('preserves request and response contract on /api/echo', async () => {
 
     assert.equal(response.status, 201);
     assert.equal(response.headers.get('x-echo-method'), 'POST');
+    assert.equal(response.headers.get('x-echo-path'), '/api/echo');
+    assert.equal(response.headers.get('x-echo-client-id'), 'abc-123');
     assert.equal(response.headers.get('content-type'), 'text/plain');
     assert.equal(payload, 'ping=1');
   });
